@@ -17,5 +17,6 @@ const router = new VueRouter({
 
 const app =new Vue(Vue.util.extend({ router }, App))
 export default context => {
+  router.setInitialLocation(context.url)
   return app
 }

@@ -4,7 +4,9 @@ const baseWebpackConfig = require('./webpack.base.config')
 
 webpackConfig = merge(baseWebpackConfig, {
   target: 'node',
-  entry: './src/server-entry.js',
+  entry: {
+    app: './src/server-entry.js'
+  },
   output: {
     filename: 'server-bundle.js',
     libraryTarget: 'commonjs2'

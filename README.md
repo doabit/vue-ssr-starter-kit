@@ -5,12 +5,14 @@
 ## Build Setup
 
 ``` bash
-# install dependencies
 npm install
-
-# build for ssr
 npm run build
+npm start
 ```
 
-# serve at localhost:3000
-npm start
+## Devlopment Setup
+
+```bash
+npm install
+npm run dev
+```

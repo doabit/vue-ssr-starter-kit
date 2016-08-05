@@ -4,7 +4,7 @@ var webpack = require('webpack')
 module.exports = {
   entry: './src/client-entry.js',
   output: {
-    path: path.resolve(__dirname, './dist'),
+    path: path.resolve(__dirname, '../dist'),
     publicPath: '/',
     filename: 'client-bundle.js'
   },
@@ -49,5 +49,5 @@ module.exports = {
       }
     })
   ],
-  devtool: '#source-map'
+  devtool: '#eval-source-map'
 }

@@ -5,7 +5,9 @@
   "private": true,
   "scripts": {
     "start": "node server",
-    "build": "webpack --config webpack.client.config.js && webpack --config webpack.server.config.js"
+    "build:client": "cross-env NODE_ENV=production webpack --config ./build/webpack.client.config.js",
+    "build:server": "cross-env NODE_ENV=production webpack --config ./build/webpack.server.config.js",
+    "build": "cross-env NODE_ENV=production webpack --config ./build/webpack.client.config.js && cross-env NODE_ENV=production webpack --config ./build/webpack.server.config.js"
   },
   "dependencies": {
     "express": "^4.14.0",

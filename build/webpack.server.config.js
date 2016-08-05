@@ -1,8 +1,8 @@
 const webpack = require('webpack')
 const merge = require('webpack-merge')
-const webpackConfig = require('./webpack.client.config')
+const baseWebpackConfig = require('./webpack.base.config')
 
-module.exports = merge(webpackConfig, {
+webpackConfig = merge(baseWebpackConfig, {
   target: 'node',
   entry: './src/server-entry.js',
   output: {
@@ -17,6 +17,14 @@ module.exports = merge(webpackConfig, {
           VUE_ENV: '"server"'
         }
       }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
     })
-  ]
+  ],
+  devtool: '#source-map'
 })
+
+module.exports = webpackConfig

@@ -19,14 +19,8 @@ webpackConfig = merge(baseWebpackConfig, {
           VUE_ENV: '"server"'
         }
       }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
     })
-  ],
-  devtool: '#source-map'
+  ]
 })
 
 module.exports = webpackConfig

@@ -24,10 +24,20 @@ app.get('*', (req, res) => {
   const start = Date.now()
   const context = { url: req.url }
   const renderStream = renderer.renderToStream(context)
+  let firstChunk = true
 
   res.write('<!DOCTYPE html><body>')
 
   renderStream.on('data', chunk => {
+    if (firstChunk) {
+      // send down initial store state
+      if (context.initialState) {
+        res.write(`<script>window.__INITIAL_STATE__=${
+          serialize(context.initialState, { isJSON: true })
+        }</script>`)
+      }
+      firstChunk = false
+    }
     res.write(chunk)
   })
 

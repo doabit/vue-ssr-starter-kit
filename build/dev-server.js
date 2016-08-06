@@ -39,7 +39,7 @@ app.use(hotMiddleware)
 app.use(express.static(path.resolve(__dirname, '../dist')))
 
 app.get('*', function(req, res) {
-  const title = "demo"
+  var title = "demo"
   res.send(`<!DOCTYPE html>
               <html>
                 <head>

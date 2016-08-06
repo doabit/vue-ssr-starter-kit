@@ -20,7 +20,7 @@ module.exports = {
     }
   },
   resolveLoader: {
-    root: path.join(__dirname, 'node_modules'),
+    fallback: [path.join(__dirname, '../node_modules')]
   },
   module: {
     loaders: [
@@ -32,6 +32,10 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel',
         exclude: /node_modules/
+      },
+      {
+        test: /\.json$/,
+        loader: 'json'
       },
       {
         test: /\.(png|jpg|gif|svg)$/,

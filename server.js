@@ -66,7 +66,7 @@ app.get('*', (req, res) => {
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>vue-2.0-ssr-demo</title>
+    <title>vue-ssr-starter-kit</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     ${process.env.NODE_ENV === 'production'
       ? `<link rel="stylesheet" href="/dist/styles.css">`

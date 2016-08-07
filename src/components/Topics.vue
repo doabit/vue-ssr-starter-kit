@@ -7,16 +7,18 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
-
+const fetchInitialData = store => {
+  return store.dispatch(`getTopics`)
+}
 export default {
-  computed: {
-    ...mapGetters({
-      topics: 'getTopics'
-    })
+  prefetch: fetchInitialData,
+  data () {
+    return {
+      topics: this.$store.getters.getTopics
+    }
   },
-  created () {
-    this.$store.dispatch('getTopics')
+  mounted () {
+    fetchInitialData(this.$store)
   }
 }
 </script>

@@ -1,26 +1,18 @@
-var path = require('path')
-var webpack = require('webpack')
+const path = require('path')
 
 module.exports = {
+  devtool: '#source-map',
   entry: {
-    app: './src/client-entry.js'
+    app: './src/client-entry.js',
+    vendor: ['vue', 'vue-router', 'vuex', 'vuex-router-sync', 'axios']
   },
   output: {
     path: path.resolve(__dirname, '../dist'),
-    publicPath: '/',
+    publicPath: '/dist/',
     filename: 'client-bundle.js'
   },
-  resolve: {
-    extensions: ['', '.js', '.vue'],
-    fallback: [path.join(__dirname, '../node_modules')],
-    alias: {
-      'src': path.resolve(__dirname, '../src'),
-      'assets': path.resolve(__dirname, '../src/assets'),
-      'components': path.resolve(__dirname, '../src/components')
-    }
-  },
   resolveLoader: {
-    fallback: [path.join(__dirname, '../node_modules')]
+    root: path.join(__dirname, '../node_modules'),
   },
   module: {
     loaders: [
@@ -34,10 +26,6 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.json$/,
-        loader: 'json'
-      },
-      {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file',
         query: {
@@ -45,15 +33,5 @@ module.exports = {
         }
       }
     ]
-  },
-  plugins: [
-    new webpack.DefinePlugin({
-      'process': {
-        env: {
-          NODE_ENV: JSON.stringify(process.env.NODE_ENV)
-        }
-      }
-    })
-  ],
-  devtool: '#eval-source-map'
+  }
 }

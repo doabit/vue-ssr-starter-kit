@@ -10,30 +10,28 @@ const defaultState = {
   count: 0
 }
 
-const state = typeof __INITIAL_STATE__ !== 'undefined' ? __INITIAL_STATE__ : defaultState
+const inBrowser = typeof window !== 'undefined'
 
-// const mutations = {
-//   TOPICS_LIST (state, topics) {
-//     state.topics = topics
-//   }
-// }
+// if in browser, use pre-fetched state injected by SSR
+const state = (inBrowser && window.__INITIAL_STATE__) || defaultState
+
 const mutations = {
-  TOPICS_LIST (state, topics) {
+  TOPICS_LIST: (state, topics) => {
     state.topics = topics
   },
 
-  INCREMENT (state) {
+  INCREMENT:  (state) => {
     state.count++
   },
 
-  DECREMENT (state) {
+  DECREMENT:  (state) => {
     state.count--
   }
 }
 
 export default new Vuex.Store({
   state,
-  mutations,
   actions,
-  getters: Object.assign({}, getters)
+  mutations,
+  getters
 })

@@ -1,6 +1,6 @@
-# vue-ssr-demo
+# vue-ssr-starter-kit
 
-> A Vue.js project with vue 2.0 and vue-router@next for server-side rendering.
+> A Vue.js project with vue 2.0, vue-router and vuex starter kit for server side rendering.
 
 ## Build Setup
 
@@ -16,3 +16,7 @@ npm start
 npm install
 npm run dev
 ```
+
+## License
+
+[MIT](http://opensource.org/licenses/MIT)

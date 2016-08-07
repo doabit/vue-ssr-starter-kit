@@ -1,11 +1,11 @@
 import request from 'axios'
 
-request.defaults.baseURL = 'https://cnodejs.org/api/v1/'
+request.defaults.baseURL = 'http://jsonplaceholder.typicode.com/'
 
 export const getTopics = ({ commit, state }) => {
-  return request.get('topics').then((response) => {
+  return request.get('posts').then((response) => {
     if (response.statusText === 'OK') {
-      commit('TOPICS_LIST', response.data.data)
+      commit('TOPICS_LIST', response.data)
     }
   }).catch((error) => {
     console.log(error)

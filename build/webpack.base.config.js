@@ -1,5 +1,5 @@
 const path = require('path')
-
+const projectRoot = path.resolve(__dirname, '../')
 module.exports = {
   devtool: '#source-map',
   entry: {
@@ -15,6 +15,20 @@ module.exports = {
     root: path.join(__dirname, '../node_modules'),
   },
   module: {
+    preLoaders: [
+      {
+        test: /\.vue$/,
+        loader: 'eslint',
+        include: projectRoot,
+        exclude: /node_modules/
+      },
+      {
+        test: /\.js$/,
+        loader: 'eslint',
+        include: projectRoot,
+        exclude: /node_modules/
+      }
+    ],
     loaders: [
       {
         test: /\.vue$/,
@@ -32,6 +46,9 @@ module.exports = {
           name: '[name].[ext]?[hash]'
         }
       }
-    ]
+    ],
+    eslint: {
+      formatter: require('eslint-friendly-formatter')
+    }
   }
 }

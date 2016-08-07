@@ -1,6 +1,6 @@
 import request from 'axios'
 
-request.defaults.baseURL = 'https://cnodejs.org/api/v1/';
+request.defaults.baseURL = 'https://cnodejs.org/api/v1/'
 
 export const getTopics = ({ commit, state }) => {
   return request.get('topics').then((response) => {

@@ -20,11 +20,11 @@ const mutations = {
     state.topics = topics
   },
 
-  INCREMENT:  (state) => {
+  INCREMENT: (state) => {
     state.count++
   },
 
-  DECREMENT:  (state) => {
+  DECREMENT: (state) => {
     state.count--
   }
 }

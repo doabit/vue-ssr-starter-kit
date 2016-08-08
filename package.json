@@ -26,7 +26,8 @@
     "dev": "node server",
     "build:client": "NODE_ENV=production webpack --config ./build/webpack.client.config.js --progress --hide-modules",
     "build:server": "NODE_ENV=production webpack --config ./build/webpack.server.config.js --progress --hide-modules",
-    "build": "npm run build:client && npm run build:server"
+    "build": "npm run build:client && npm run build:server",
+    "unit": "karma start ./test/unit/karma.conf.js"
   },
   "dependencies": {
     "axios": "^0.13.1",
@@ -56,6 +57,14 @@
     "eslint-plugin-standard": "^2.0.0",
     "extract-text-webpack-plugin": "^2.0.0-beta.3",
     "file-loader": "^0.8.4",
+    "karma": "^1.1.2",
+    "karma-mocha": "^1.1.1",
+    "karma-phantomjs-launcher": "^1.0.1",
+    "karma-sinon-chai": "^1.2.3",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-spec-reporter": "0.0.26",
+    "karma-webpack": "^1.8.0",
+    "phantomjs-prebuilt": "^2.1.10",
     "vue-loader": "^9.2.2",
     "webpack": "^2.1.0-beta.20",
     "webpack-dev-middleware": "^1.6.1",

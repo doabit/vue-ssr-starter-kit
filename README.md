@@ -10,7 +10,7 @@ npm run build
 npm start
 ```
 
-## Devlopment Setup
+## Development Setup
 
 ```bash
 npm install

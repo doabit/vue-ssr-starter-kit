@@ -12,6 +12,18 @@ const createBundleRenderer = require('vue-server-renderer').createBundleRenderer
 
 const app = express()
 
+// parse index.html template
+const html = (() => {
+  const template = fs.readFileSync(resolve('./index.html'), 'utf-8')
+  const i = template.indexOf('{{ APP }}')
+  // styles are injected dynamically via vue-style-loader in development
+  const style = isProd ? '<link rel="stylesheet" href="/dist/styles.css">' : ''
+  return {
+    head: template.slice(0, i).replace('{{ STYLE }}', style),
+    tail: template.slice(i + '{{ APP }}'.length)
+  }
+})()
+
 let renderer
 if (isProd) {
   // create server renderer from real fs
@@ -36,30 +48,26 @@ app.use('/dist', express.static(resolve('./dist')))
 app.use(favicon(path.resolve(__dirname, 'src/assets/logo.png')))
 
 app.get('*', (req, res) => {
+  if (!renderer) {
+    return res.end('waiting for compilation... refresh in a moment.')
+  }
+
   var s = Date.now()
   const context = { url: req.url }
   const renderStream = renderer.renderToStream(context)
   let firstChunk = true
 
-  res.write(`<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>vue-ssr-starter-kit</title>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
-    ${process.env.NODE_ENV === 'production'
-      ? `<link rel="stylesheet" href="/dist/styles.css">`
-      : ``}
-  </head>
-  <body>`)
+  res.write(html.head)
 
   renderStream.on('data', chunk => {
     if (firstChunk) {
-      // send down initial store state
+      // embed initial store state
       if (context.initialState) {
-        res.write(`<script>window.__INITIAL_STATE__=${
-          serialize(context.initialState, { isJSON: true })
-        }</script>`)
+        res.write(
+          `<script>window.__INITIAL_STATE__=${
+            serialize(context.initialState, { isJSON: true })
+          }</script>`
+        )
       }
       firstChunk = false
     }
@@ -67,11 +75,7 @@ app.get('*', (req, res) => {
   })
 
   renderStream.on('end', () => {
-    res.end(`
-      <script src="/dist/client-vendor-bundle.js"></script>
-      <script src="/dist/client-bundle.js"></script>
-      </body></html>`
-    )
+    res.end(html.tail)
     console.log(`whole request: ${Date.now() - s}ms`)
   })
 

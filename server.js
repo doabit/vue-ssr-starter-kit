@@ -1,59 +1,38 @@
 process.env.VUE_ENV = 'server'
+const isProd = process.env.NODE_ENV === 'production'
 
 const fs = require('fs')
 const path = require('path')
+const resolve = file => path.resolve(__dirname, file)
 const express = require('express')
 const favicon = require('serve-favicon')
 const serialize = require('serialize-javascript')
-const createBundleRenderer = require('vue-server-renderer').createBundleRenderer
 
-let renderer
-function createRenderer (fs) {
-  const bundlePath = path.resolve(__dirname, 'dist/server-bundle.js')
-  return createBundleRenderer(fs.readFileSync(bundlePath, 'utf-8'))
-}
+const createBundleRenderer = require('vue-server-renderer').createBundleRenderer
 
 const app = express()
 
-if (process.env.NODE_ENV !== 'production') {
-  const webpack = require('webpack')
-  const clientConfig = require('./build/webpack.client.config')
-
-  clientConfig.entry.app = ['webpack-hot-middleware/client', clientConfig.entry.app]
-  clientConfig.plugins.push(
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
-  )
-
-  const clientCompiler = webpack(clientConfig)
-  app.use(require('webpack-dev-middleware')(clientCompiler, {
-    publicPath: clientConfig.output.publicPath,
-    stats: {
-      colors: true,
-      chunks: false
-    }
-  }))
-  app.use(require('webpack-hot-middleware')(clientCompiler))
-
-  // watch and update server renderer
-  const MFS = require('memory-fs')
-  const serverConfig = require('./build/webpack.server.config')
-  const serverCompiler = webpack(serverConfig)
-  const mfs = new MFS()
-  serverCompiler.outputFileSystem = mfs
-  serverCompiler.watch({}, (err, stats) => {
-    if (err) throw err
-    stats = stats.toJson()
-    stats.errors.forEach(err => console.error(err))
-    stats.warnings.forEach(err => console.warn(err))
-    renderer = createRenderer(mfs)
-  })
-} else {
-  app.use('/dist', express.static(path.resolve(__dirname, 'dist')))
+let renderer
+if (isProd) {
   // create server renderer from real fs
-  renderer = createRenderer(fs)
+  const bundlePath = resolve('./dist/server-bundle.js')
+  renderer = createRenderer(fs.readFileSync(bundlePath, 'utf-8'))
+} else {
+  require('./build/dev-server')(app, bundle => {
+    renderer = createRenderer(bundle)
+  })
 }
 
+function createRenderer (bundle) {
+  return createBundleRenderer(bundle, {
+    cache: require('lru-cache')({
+      max: 1000,
+      maxAge: 1000 * 60 * 15
+    })
+  })
+}
+
+app.use('/dist', express.static(resolve('./dist')))
 app.use(favicon(path.resolve(__dirname, 'src/assets/logo.png')))
 
 app.get('*', (req, res) => {

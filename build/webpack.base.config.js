@@ -1,5 +1,7 @@
 const path = require('path')
 const projectRoot = path.resolve(__dirname, '../')
+const vueConfig = require('./vue-loader.config')
+
 module.exports = {
   devtool: '#source-map',
   entry: {
@@ -11,37 +13,25 @@ module.exports = {
     publicPath: '/dist/',
     filename: 'client-bundle.js'
   },
-  resolve: {
-    extensions: ['', '.js', '.vue'],
-    fallback: [path.join(__dirname, '../node_modules')],
-    alias: {
-      'src': path.resolve(__dirname, '../src'),
-      'assets': path.resolve(__dirname, '../src/assets'),
-      'components': path.resolve(__dirname, '../src/components')
-    }
-  },
-  resolveLoader: {
-    root: path.join(__dirname, '../node_modules'),
-  },
+
   module: {
-    preLoaders: [
+    rules: [
       {
-        test: /\.vue$/,
-        loader: 'eslint',
-        include: projectRoot,
+        enforce: "pre",
+        test: /\.js$/,
+        loader: "eslint-loader",
         exclude: /node_modules/
       },
       {
-        test: /\.js$/,
-        loader: 'eslint',
-        include: projectRoot,
+        enforce: "pre",
+        test: /\.vue$/,
+        loader: "eslint-loader",
         exclude: /node_modules/
-      }
-    ],
-    loaders: [
+      },
       {
         test: /\.vue$/,
-        loader: 'vue'
+        loader: 'vue',
+        options: vueConfig
       },
       {
         test: /\.js$/,
@@ -51,13 +41,10 @@ module.exports = {
       {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file',
-        query: {
+        options: {
           name: '[name].[ext]?[hash]'
         }
       }
-    ],
-    eslint: {
-      formatter: require('eslint-friendly-formatter')
-    }
+    ]
   }
 }

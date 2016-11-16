@@ -8,6 +8,16 @@ module.exports = {
     app: './src/client-entry.js',
     vendor: ['vue', 'vue-router', 'vuex', 'vuex-router-sync', 'axios']
   },
+  resolve: {
+    modules: [path.resolve(__dirname, "src"), "node_modules"],
+    extensions: ['.js', '.vue'],
+    alias: {
+      'src': path.resolve(__dirname, '../src'),
+      'assets': path.resolve(__dirname, '../src/assets'),
+      'components': path.resolve(__dirname, '../src/components')
+    }
+  },
+
   output: {
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/dist/',

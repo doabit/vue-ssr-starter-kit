@@ -27,7 +27,7 @@
     "build:client": "NODE_ENV=production webpack --config ./build/webpack.client.config.js --progress --hide-modules",
     "build:server": "NODE_ENV=production webpack --config ./build/webpack.server.config.js --progress --hide-modules",
     "build": "npm run build:client && npm run build:server",
-    "unit": "karma start ./test/unit/karma.conf.js"
+    "unit": "karma start ./test/unit/karma.conf.js --single-run"
   },
   "dependencies": {
     "axios": "^0.13.1",

@@ -23,8 +23,12 @@ if (process.env.NODE_ENV === 'production') {
 
   vueConfig.loaders = {
     css: ExtractTextPlugin.extract({
-      loader: "css-loader",
-      fallbackLoader: "vue-style-loader"
+      loader: 'css-loader',
+      fallbackLoader: 'vue-style-loader'
+    }),
+    stylus: ExtractTextPlugin.extract({
+      loader: 'css-loader!stylus-loader',
+      fallbackLoader: 'vue-style-loader'
     })
   }
 

@@ -1,5 +1,5 @@
 const path = require('path')
-const projectRoot = path.resolve(__dirname, '../')
+// const projectRoot = path.resolve(__dirname, '../')
 const vueConfig = require('./vue-loader.config')
 
 module.exports = {
@@ -9,7 +9,7 @@ module.exports = {
     vendor: ['vue', 'vue-router', 'vuex', 'vuex-router-sync', 'axios']
   },
   resolve: {
-    modules: [path.resolve(__dirname, "src"), "node_modules"],
+    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
     extensions: ['.js', '.vue'],
     alias: {
       'src': path.resolve(__dirname, '../src'),
@@ -27,15 +27,15 @@ module.exports = {
   module: {
     rules: [
       {
-        enforce: "pre",
+        enforce: 'pre',
         test: /\.js$/,
-        loader: "eslint-loader",
+        loader: 'eslint-loader',
         exclude: /node_modules/
       },
       {
-        enforce: "pre",
+        enforce: 'pre',
         test: /\.vue$/,
-        loader: "eslint-loader",
+        loader: 'eslint-loader',
         exclude: /node_modules/
       },
       {

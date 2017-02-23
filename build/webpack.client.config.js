@@ -12,7 +12,7 @@ const config = Object.assign({}, base, {
     // extract vendor chunks for better caching
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      filename: 'client-vendor-bundle.js'
+      filename: 'client-vendor-bundle.[hash].js'
     })
   ])
 })
@@ -33,7 +33,7 @@ if (process.env.NODE_ENV === 'production') {
   }
 
   config.plugins.push(
-    new ExtractTextPlugin('styles.css'),
+    new ExtractTextPlugin('styles.[hash].css'),
     // this is needed in webpack 2 for minifying CSS
     new webpack.LoaderOptionsPlugin({
       minimize: true

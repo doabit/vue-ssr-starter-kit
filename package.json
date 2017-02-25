@@ -65,7 +65,7 @@
     "karma-sinon-chai": "^1.2.3",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-spec-reporter": "0.0.26",
-    "karma-webpack": "^1.8.0",
+    "karma-webpack": "^2.0.2",
     "mocha": "^3.0.2",
     "phantomjs-prebuilt": "^2.1.10",
     "rimraf": "^2.6.0",
@@ -75,7 +75,7 @@
     "stylus-loader": "^2.4.0",
     "vue-loader": "^10.0.0",
     "vue-template-compiler": "^2.0.0",
-    "webpack": "^2.1.0-beta.26",
+    "webpack": "^2.2.1",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-hot-middleware": "^2.12.2"
   }

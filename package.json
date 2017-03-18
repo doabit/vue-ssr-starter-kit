@@ -59,6 +59,7 @@
     "eslint-plugin-standard": "^2.0.0",
     "extract-text-webpack-plugin": "^2.0.0-beta.3",
     "file-loader": "^0.8.4",
+    "html-webpack-plugin": "^2.28.0",
     "karma": "^1.1.2",
     "karma-mocha": "^1.1.1",
     "karma-phantomjs-launcher": "^1.0.1",
@@ -73,10 +74,13 @@
     "sinon-chai": "^2.8.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^2.4.0",
+    "sw-precache-webpack-plugin": "^0.9.1",
     "vue-loader": "^10.0.0",
+    "vue-ssr-webpack-plugin": "^1.0.2",
     "vue-template-compiler": "^2.0.0",
     "webpack": "^2.2.1",
     "webpack-dev-middleware": "^1.6.1",
-    "webpack-hot-middleware": "^2.12.2"
+    "webpack-hot-middleware": "^2.12.2",
+    "webpack-merge": "^4.1.0"
   }
 }

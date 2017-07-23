@@ -2,7 +2,7 @@ const path = require('path')
 // const projectRoot = path.resolve(__dirname, '../')
 const vueConfig = require('./vue-loader.config')
 
-module.exports = {
+const config = {
   devtool: '#source-map',
   entry: {
     app: './src/client-entry.js',
@@ -27,18 +27,6 @@ module.exports = {
   module: {
     rules: [
       {
-        enforce: 'pre',
-        test: /\.js$/,
-        loader: 'eslint-loader',
-        exclude: /node_modules/
-      },
-      {
-        enforce: 'pre',
-        test: /\.vue$/,
-        loader: 'eslint-loader',
-        exclude: /node_modules/
-      },
-      {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: vueConfig
@@ -58,3 +46,22 @@ module.exports = {
     ]
   }
 }
+
+if (process.env.NODE_ENV !== 'production') {
+  config.module.rules.push(
+    {
+      enforce: 'pre',
+      test: /\.js$/,
+      loader: 'eslint-loader',
+      exclude: /node_modules/
+    },
+    {
+      enforce: 'pre',
+      test: /\.vue$/,
+      loader: 'eslint-loader',
+      exclude: /node_modules/
+    }
+  )
+}
+
+module.exports = config

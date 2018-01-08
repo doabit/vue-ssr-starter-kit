@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import App from './App.vue'
-import store from './vuex/store'
-import router from './router'
+import createStore from './vuex/store'
+import createRouter from './router'
 import { sync } from 'vuex-router-sync'
 
 export function createApp () {
+  const store = createStore()
+  const router = createRouter()
   // 同步路由状态(route state)到 store
   sync(store, router)
   // 创建应用程序实例，将 router 和 store 注入

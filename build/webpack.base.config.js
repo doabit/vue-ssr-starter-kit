@@ -1,7 +1,9 @@
 const path = require('path')
 // const projectRoot = path.resolve(__dirname, '../')
 const vueConfig = require('./vue-loader.config')
-
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const isProduction = process.env.NODE_ENV === 'production'
+console.log(isProduction, 'isProduction')
 module.exports = {
   devtool: '#source-map',
   entry: {
@@ -56,5 +58,9 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+  plugins: isProduction
+    // 确保添加了此插件！
+    ? [new ExtractTextPlugin({ filename: 'common.[chunkhash].css' })]
+    : []
 }

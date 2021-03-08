@@ -6,6 +6,7 @@ import * as getters from './getters'
 Vue.use(Vuex)
 
 const state = {
+  indexData: { todos: [], users: [] },
   topics: [],
   count: 0
 }
@@ -13,6 +14,14 @@ const state = {
 const mutations = {
   TOPICS_LIST: (state, topics) => {
     state.topics = topics
+  },
+
+  INDEX_TODOS_LIST: (state, data) => {
+    Vue.set(state.indexData, 'todos', data)
+  },
+
+  INDEX_USERS_LIST: (state, data) => {
+    Vue.set(state.indexData, 'users', data)
   },
 
   INCREMENT: (state) => {

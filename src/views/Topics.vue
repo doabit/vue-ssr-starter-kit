@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-for="topic in topics">
-      <p>{{topic.title}}</p>
+      <p>{{ topic.title }}</p>
     </div>
   </div>
 </template>

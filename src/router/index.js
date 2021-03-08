@@ -1,8 +1,8 @@
 import Vue from 'vue'
-import Home from '../components/Home.vue'
-import About from '../components/About.vue'
-import Counter from '../components/Counter.vue'
-import Topics from '../components/Topics.vue'
+import Home from '../views/Home.vue'
+import About from '../views/About.vue'
+import Counter from '../views/Counter.vue'
+import Topics from '../views/Topics.vue'
 import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)

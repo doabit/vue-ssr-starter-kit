@@ -3,7 +3,7 @@ const path = require('path')
 const vueConfig = require('./vue-loader.config')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const isProduction = process.env.NODE_ENV === 'production'
-console.log(isProduction, 'isProduction')
+
 module.exports = {
   devtool: '#source-map',
   entry: {

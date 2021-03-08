@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <h1>Home Page</h1>
     <div class="block todos">
       <h1>Todos List</h1>
       <div v-for="todo in items.todos" :key="todo.id"> <todo :todo="todo" /> </div>
